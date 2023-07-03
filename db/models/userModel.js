@@ -27,6 +27,10 @@ userSchema.methods.hashPassword = async function (password) {
 	this.password = await bcrypt.hash(password, 10);
 };
 
+userSchema.methods.checkPassword = async function (password) {
+	return bcrypt.compare(password, this.password);
+};
+
 const User = model("user", userSchema);
 
 module.exports = User;
